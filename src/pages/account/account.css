@@ -1,0 +1,212 @@
+.account-body{
+    width: 100%;
+    height: 100vh;
+    /* background: repeating-linear-gradient(45deg, #393E46 , #212121 ); */
+    background: #d9d9d9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.admin-acc-container{
+    width: 50%;
+    height: 80%;
+    margin: 15vh auto;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+}
+
+.log{
+    width: 70%;
+    height: 90%;
+    background: transparent;
+    border: 1px solid #09203F;
+    border-radius: 10px 10px 0 0;
+   
+    
+}
+.login{
+    width: 100%;
+    height: 10%;
+    background: #09203F;
+    font-size: 2em;
+    font-weight: 500;
+    padding: 7px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 10px;
+    color: #fff;
+    
+}
+
+.log-info{
+    width: 100%;
+    height: fit-content;
+    padding: 15px 30px;
+  
+}
+
+.fa-log-info{
+    width: 100%;
+    height: fit-content;
+    background: #fff;
+    padding: 15px 30px;
+}
+
+.fa-log-info span{
+    font-size: 0.875em;
+}
+
+/* .log-el{
+    border: 1px solid #09203F;
+
+} */
+
+.log-info h3{
+    color:#09203F;
+    font-size: 1em;
+    margin-bottom: 32px;
+    font-weight: 500;
+    text-align: center;
+     
+}
+
+button{
+    height: 50px;
+    width: 100%;
+    background:#09203F;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: 500;
+    color: #fff;
+    transition: all ease-in-out .5s;
+}
+button:hover{
+    background: #d9d9d9;
+    color: #09203F;
+    border: 1px solid #09203F;
+
+}
+.log-info p{
+    font-size: 13px;
+    color: white;
+    margin-bottom: 30px;
+    text-decoration: none;
+}
+
+.log-info p a{
+    text-decoration: none;
+    color: #0d9daa;
+    font-size: 15px;
+    transition: 0.2s;
+}
+.log-info p a:hover{
+    color: #73a084;
+}
+
+
+
+@media (max-width: 1120px) and (min-width: 960px){
+   .log{
+    width: 80%;
+   }
+
+
+
+   .log-info h3{
+    font-size: 1.5vw;
+   }
+
+
+}
+
+@media (max-width: 980px) and (min-width: 0px){
+   .log{
+    width: 100%;
+   }
+
+ 
+
+
+}
+
+
+@media (max-width: 980px) and (min-width: 840px){
+   
+
+   .log-info h3{
+    font-size: 1.65vw;
+   }
+
+
+}
+
+@media (max-width: 980px) and (min-width: 840px){   
+
+   .log-info h3{
+    font-size: 1.65vw;
+   }
+
+
+}
+
+@media (max-width: 840px) and (min-width: 768px){   
+
+   .log-info h3{
+    font-size: 1.65vw;
+   }
+
+
+}
+
+
+@media (max-width: 768px) and (min-width: 580px){   
+
+    .admin-acc-container{
+        width: 70%;
+    }
+
+ 
+}
+
+@media (max-width: 580px) and (min-width: 440px){   
+
+    .admin-acc-container{
+        width: 80%;
+    }
+
+    .login{
+        font-size: 1.75em;
+    }
+
+    .log-info h3{
+        font-size: 2.65vw;
+    }
+
+ 
+}
+
+
+@media (max-width: 440px) and (min-width: 0px){   
+
+    .admin-acc-container{
+        width: 90%;
+    }
+
+    .login{
+        font-size: 1.75em;
+    }
+
+    .log-info h3{
+        font-size: 3.5vw;
+    }
+
+ 
+}

@@ -1,0 +1,42 @@
+
+.dash-page{
+    width: 100%;
+    height: 90vh;
+  
+}
+
+.dash-top{
+    width: 100%;
+    height: 7.5vh;
+    background: #F8F8FF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+      
+}
+
+.dash-title{
+    width: fit-content;
+    height: fit-content;
+    color: #09203F;
+    font-size: 1.5em;
+    font-weight: 500;
+   
+}
+
+
+/* 
+.dash-page::-webkit-scrollbar{
+    width: 0px;
+}
+.dash-page::-webkit-scrollbar-thumb{
+    background:transparent;
+    border-radius: 10px;
+} */
+
+.dash-page-btns{
+    width: 80%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

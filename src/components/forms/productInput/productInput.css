@@ -1,0 +1,75 @@
+.product-input-control{
+    width: 100%;
+    height: fit-content;
+    display: block;
+    margin-top: 30px;
+    
+}
+
+.product-input-lbl{
+    font-size: 0.875em;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #09203F;
+    display: block;
+   
+}
+
+.product-input-hint{
+    font-size: 0.625em;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #09203F;
+    display: block;
+   
+}
+
+.product-input{
+    width: 100%;
+    height: 40px;
+    background: transparent;
+    border-radius: 5px;
+    border: 0.5px solid #09203F;
+    font-size: 0.875em;
+    color: #09203F;
+    padding: 5px 15px;
+    font-weight: 400;
+
+}
+
+.product-textarea{
+    width: 100%;
+    height: 150px;
+    background: transparent;
+    border-radius: 5px;
+    border: 0.5px solid #09203F;
+    font-size: 0.875em;
+    color: #09203F;
+    padding: 5px 15px;
+    font-weight: 400;
+
+}
+
+.product-input::placeholder{
+    font-size: 1em;
+    font-weight: 400;
+    color: #09203F;
+    opacity: .7;
+}
+
+.product-input.focused, .product-textarea.focused{
+    outline: 1px solid rgb(75, 132, 75);
+
+}
+
+.product-input.inp-error, .product-textarea.inp-error{
+    border: 1px solid #ee4949;
+
+}
+
+
+
+.product-inp-error-msg{
+    font-size: 0.75em;
+    color: #ee4949;
+}

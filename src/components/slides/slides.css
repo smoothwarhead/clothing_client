@@ -1,0 +1,538 @@
+.slide-container{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: rgba(5, 0, 0, 0.5);
+    display: none;
+        
+}
+
+.account-slide, .cart-slide{
+    background: #fff;
+    width: 35%;
+    height: 100%;
+    z-index: 101;
+    position: fixed;
+    right: -100%;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+   
+}
+
+.account-slide{
+    padding: 30px;
+}
+
+.account-slide-hdr{
+    width: 100%;
+    height: 7vh;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close-icon{
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+
+/* search slide */
+
+
+.search-slide-container{
+    width: 100%;
+    height: 83vh;
+    position: fixed;
+    top: 21vh;
+    left: 0;
+    z-index: 100;
+    background: rgba(5, 0, 0, 0.6);
+    display: none;
+}
+
+.search-slide{
+    width: 100%;
+    height: 13vh;
+    position: relative;
+    top: 0;
+    background: #2B0D21;
+    left: 0;
+    border-top: 0.5px solid rgba(255, 255, 255, .5);
+    padding: 20px 100px 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 101;
+
+}
+
+.admin-search-slide{
+    width: 100%;
+    height: 10vh;
+    position: fixed;
+    background: #09203f;
+    top: -30%;
+    left: 0;
+    border-top: 0.5px solid rgba(255, 255, 255, .5);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 101;
+
+}
+
+
+.search-bar{
+    width: 95%;
+    height: 100%; 
+}
+
+
+.m-ad-search-bar{
+    width: 95%;
+    height: 100%; 
+    
+}
+
+.search-bar .site-search-input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 1.625em;
+    color: #fff;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+
+.search-bar .site-search-input:focus{
+    outline: none;
+}
+
+.m-ad-search-input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.m-ad-search-input:focus{
+    outline: none;
+}
+
+.m-ad-search-input::placeholder{   
+    font-size: 1em;
+    opacity: .5;
+    color: #fff;
+    
+}
+
+.search-icon{
+    font-size: 2em;
+    color: #fff;
+    opacity: .6;
+    
+}
+
+.search-close-icon{
+    font-size: 1.75em;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+
+/* menu slide */
+
+.mobile-menu-container{
+    width: 60%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -100%;
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.site-menu{
+    background: #2F1326;
+
+}
+
+.admin-menu{
+    background: #09203f
+
+}
+
+.m-header{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.m-header-right{
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: 500;
+    
+}
+
+.m-header-right:hover{
+    opacity: 0.7;
+}
+
+.m-nav-body{
+    width: 100%;
+    height: 80%;
+    padding-top: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.m-nav-body-el a{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.m-nav-body-el a:hover{
+    opacity: .7;
+}
+
+.m-account-el{
+    width: 100%;
+    height: 20%;
+    display: none;
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.m-account-el a{
+    text-decoration: none;
+    color: #fff;
+
+}
+
+.m-account-el-links{
+    opacity: .6;
+    font-size: 0.875em;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+
+}
+
+.profile-slide-container{
+    width: 100%;
+    height: 95vh;
+    position: fixed;
+    top: 8vh;
+    right: 0;
+    z-index: 100;
+    background: rgba(5, 0, 0, 0.6);
+    display: none;
+}
+
+.profile-slide{
+    width: 18%;
+    height: 20vh;
+    position: fixed;
+    background: #D9D9D9;
+    border-radius: 0px 0px 4px 4px;
+    border-top: 0.5px solid #09203f;
+    /* border: 1px solid red; */
+    top: -10px;
+    right: 6vw;
+    padding: 20px;
+    display: none;
+    z-index: 101;
+}
+
+.profile-slide a{
+    font-size: 0.875em;
+    font-weight: 500;
+    color: #09203f;
+    text-decoration: none;
+    text-align: left;
+    display: block;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all ease-in-out 0.5s;
+
+}
+
+.profile-slide span{
+    font-size: 0.875em;
+    font-weight: 500;
+    color: #09203f;
+    text-decoration: none;
+    text-align: left;
+    display: block;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all ease-in-out 0.5s;
+
+}
+
+.profile-slide a:hover{
+    text-decoration: underline;
+}
+
+.profile-slide span:hover{
+    text-decoration: underline;
+}
+
+
+
+/* media query */
+
+
+  @media (max-width: 1290px) and (min-width: 1120px){
+
+    .account-slide, .cart-slide{
+        
+        width: 50%;
+        
+       
+    }
+
+    .search-slide-container{       
+        top: 20vh;        
+    }
+
+
+
+  }
+
+
+  @media (max-width: 1120px) and (min-width: 0px){
+
+    .search-slide-container{       
+        top: 16vh;        
+    }
+
+
+  }
+
+
+  @media (max-width: 1120px) and (min-width: 960px){
+
+    .account-slide, .cart-slide{
+        
+        width: 55%;       
+       
+    }
+
+    .search-slide-container{       
+        top: 16vh;        
+    }
+
+    .profile-slide{
+        width: 20%;
+    }
+
+
+
+  }
+
+
+
+  @media (max-width: 960px) and (min-width: 840px){
+
+    .account-slide, .cart-slide{
+        
+        width: 65%;
+        
+       
+    }
+
+    .profile-slide{
+        width: 22%;
+    }
+
+    .search-bar .site-search-input{
+        font-size: 1.375em;
+    }
+
+  }
+
+ 
+
+  @media (max-width: 840px) and (min-width: 540px){
+
+
+    .search-bar .site-search-input{
+        font-size: 1.25em;
+    }
+
+
+  }
+
+  @media (max-width: 840px) and (min-width: 0px){
+
+      
+    .mobile-menu-container{
+        width: 100%;
+    }
+
+  }
+
+  @media (max-width: 840px) and (min-width: 620px){
+
+    .account-slide, .cart-slide{
+        
+        width: 80%;
+        
+       
+    }
+
+    .profile-slide{
+        width: 30%;
+    }
+
+     .search-slide{
+        padding: 20px 50px;
+    }
+
+    .search-bar .site-search-input{
+        font-size: 1.25em;
+    }
+  }
+
+
+
+  @media (max-width: 620px) and (min-width: 0px){
+
+    .account-slide, .cart-slide{
+        
+        width: 100%;
+        
+       
+    }
+
+    .search-slide{
+        padding: 20px;
+    }
+
+
+  } 
+
+  @media (max-width: 620px) and (min-width: 540px){
+
+    .account-slide, .cart-slide{
+        
+        width: 100%;
+        
+       
+    }
+
+    .profile-slide{
+        width: 39%;
+    }
+
+ 
+    .search-bar .site-search-input{
+        font-size: 1.125em;
+    }
+
+
+  } 
+
+
+  @media (max-width: 540px) and (min-width: 440px){
+
+    .search-bar .site-search-input{
+        font-size: 3.75vw;
+    }
+
+    .profile-slide{
+        width: 35%;
+    }
+
+  } 
+
+
+  @media (max-width: 440px) and (min-width: 375px){
+
+
+    .search-slide{
+        padding: 20px;
+    }
+    .search-bar{
+        height: 80%;
+    }
+
+    .search-bar .site-search-input{
+        font-size: 3.75vw;
+    }
+
+    .profile-slide{
+        width: 35%;
+    }
+
+  } 
+
+  @media (max-width: 375px) and (min-width: 0px){
+
+    .account-slide{
+        padding: 15px;
+                
+       
+    }
+
+    .profile-slide{
+        width: 50%;
+        padding: 20px 10px;
+    }
+
+    .search-bar{
+        height: 70%;
+    }
+
+    .search-bar .site-search-input{
+        font-size: 4vw;
+    }
+
+    .m-ad-search-input{
+       
+        font-size: 4vw;
+        
+    }    
+  
+    
+    .m-ad-search-input::placeholder{   
+        font-size: 4vw;
+       
+    }
+
+  } 
+
+ 

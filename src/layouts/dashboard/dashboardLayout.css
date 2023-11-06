@@ -1,0 +1,218 @@
+.admin-page{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 15% auto 5%;
+    grid-template-rows: 8% 4% auto; 
+    font-family: 'Montserrat', sans-serif;
+   
+}
+
+.top-section{
+    grid-column: 2/4;
+    grid-row: 1/2;
+    width: 100%;
+    height: 100%;
+   
+}
+
+.admin-body-section{
+    grid-column: 2/3;
+    grid-row: 2/4;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+       
+}
+
+.side-section{
+    grid-column: 1/2;
+    grid-row: 1/4;
+    width: 100%;
+    height: 100%;
+
+}
+
+
+
+
+
+/* staffs page */
+
+.staffs-page{
+    width: 100%;
+    height: 86vh;
+    overflow-y: scroll;
+   
+}
+
+
+.staffs-page::-webkit-scrollbar{
+    width: 7px;
+}
+.staffs-page::-webkit-scrollbar-thumb{
+    background:transparent;
+    border-radius: 10px;
+}
+
+.staffs-page-title{
+    width: 100%;
+    height: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.s-title{
+    width: 30%;
+    font-size: 1.25em;
+    font-weight: 500;
+    color: #584B26;
+
+}
+
+.title-btns{
+    width: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.add-staff-btn{
+    width: fit-content;
+    height: fit-content;
+    padding: 10px 40px;
+    /* font-size: 1em; */
+    font-weight: 500;
+    background: #1DAE8C;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+}
+.add-staff-btn-icon{
+    font-size: 1.375em;
+    margin-right: 10px;
+}
+
+.add-staff-btn span{
+    font-size: 1em;
+}
+
+.add-staff-btn:hover{
+    background: #116551;
+}
+
+
+
+/* media query */
+
+@media (max-width: 860px) and (min-width: 0px){
+
+    .top-section{
+        grid-column: 1/4;
+        grid-row: 1/2;
+       
+    }
+
+    .admin-body-section{
+        grid-column: 1/4;
+        grid-row: 2/4;
+    }
+
+    .side-section{
+        display: none;
+    }
+
+
+}
+
+@media (max-width: 860px) and (min-width: 0px){
+
+    .staffs-page{
+        width: 92%;
+        margin: auto;
+        
+    }
+
+}
+
+
+@media (max-width: 600px) and (min-width: 370px){
+
+    .s-title{
+        font-size: 1.2em;       
+    
+    }
+
+
+    .add-staff-btn{
+        padding: 10px 20px;
+    }
+
+    .add-staff-btn-icon{
+        font-size: 1.25em;
+        
+    }
+    
+    .add-staff-btn span{
+        font-size: 0.75em;
+    }
+
+
+}
+
+@media (max-width: 400px) and (min-width: 300px){
+
+
+    .add-staff-btn{
+        padding: 10px;
+    }
+
+    .add-staff-btn-icon{
+        font-size: 5vw;
+        margin-right: 5px;
+    }
+    
+    .add-staff-btn span{
+        font-size: 3.25vw;
+    }
+
+
+}
+
+
+@media (max-width: 370px) and (min-width: 0px){
+
+    .s-title{
+        font-size: 1em;       
+    
+    }
+
+
+}
+
+@media (max-width: 300px) and (min-width: 0px){
+
+
+    .add-staff-btn{
+        padding: 10px;
+    }
+
+    .add-staff-btn-icon{
+        font-size: 6vw;
+        margin-right: 5px;
+    }
+    
+    .add-staff-btn span{
+        font-size: 3vw;
+    }
+
+
+}
+
