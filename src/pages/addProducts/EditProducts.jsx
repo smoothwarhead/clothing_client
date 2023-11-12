@@ -59,6 +59,7 @@ const EditProducts = () => {
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const [pack, setPack] = useState("");
+  const [pictureData, setPictureData] = useState("");
 
 
 
@@ -94,6 +95,9 @@ const EditProducts = () => {
 //     setValues({ ...values, [e.target.name]: e.target.value});   
 
 //   }
+
+
+  
 
 
   const handleProductName = (e) => {
@@ -365,7 +369,7 @@ const handleIconClick = () => {
 
 const saveProduct = () => {
 
-    const fileData = {productName, description, quantity, unitPrice, color, size, pack,  productImage, slug: productName?.split(" ").join("-").toLowerCase() };
+    const fileData = { productName, description, quantity, unitPrice, color, size, pack,  productImage, slug: productName?.split(" ").join("-").toLowerCase() };
     
 
     if(hasEmptyKey(fileData))

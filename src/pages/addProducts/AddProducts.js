@@ -149,7 +149,9 @@ const AddProducts = () => {
     else{
 
       setPending(true);
-      createProduct(fileData);
+
+      console.log(fileData);
+      // createProduct(fileData);
 
 
 

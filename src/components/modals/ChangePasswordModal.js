@@ -21,7 +21,7 @@ const initialValues = {
 
 
 const ChangePasswordModal = ({ closeModal }) => {
-  const { modalOpen, message } = useContext(DataContext);
+  const { modalOpen, message, setModalOpen } = useContext(DataContext);
 
   const { logout, changePassword } = useApi();
 
@@ -66,6 +66,7 @@ const ChangePasswordModal = ({ closeModal }) => {
 
 
   const handleOk = () => {
+    setModalOpen(false);
     logout();
   }
 
