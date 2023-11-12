@@ -39,7 +39,7 @@ const useApi = () => {
 
             const token = SessionManager.getToken();
 
-            let res = await Api.post("/access-auth/business/admin/create-staff", 
+            let res = await Api.post("/admin/add-staff", 
                 JSON.stringify(data),
                 {
                     headers: {
