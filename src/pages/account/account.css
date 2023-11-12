@@ -111,6 +111,21 @@ button:hover{
     color: #73a084;
 }
 
+.login-verification{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10vh;
+
+}
+
+.login-verification-el{
+    font-size: 1em;
+    color: #09203F;
+    opacity: 0.8;
+}
+
 
 
 @media (max-width: 1120px) and (min-width: 960px){

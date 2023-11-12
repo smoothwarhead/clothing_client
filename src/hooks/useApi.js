@@ -24,6 +24,8 @@ const useApi = () => {
     const { authErrorHandler, dataErrorHandler } = useError();
 
     const [authMessage, setAuthMessage] = useState("");
+
+    const [submitting, setSubmitting] = useState(false);
     
 
     
@@ -76,6 +78,8 @@ const useApi = () => {
 
     const login = async (data) => {
 
+        setSubmitting(true);
+
         try {
             
             let res = await Api.post("/login", 
@@ -94,6 +98,8 @@ const useApi = () => {
                 setOpen2fa(res.data.Is2fa);
              
                 setTwoFaEmail(res.data.Email);
+                setSubmitting(false);
+
                 
             }
           
@@ -101,14 +107,19 @@ const useApi = () => {
 
         } catch (error) {
 
-           let msg = authErrorHandler(error);
-           setAuthMessage(msg);
+            let msg = authErrorHandler(error);
+            setAuthMessage(msg);
+            setSubmitting(false);
+
         }
         
     }
 
 
     const twoFaLogin = async (data) => {
+
+        setSubmitting(true);
+
 
         try {
 
@@ -131,6 +142,7 @@ const useApi = () => {
 
                 const userName = `${res.data.User.FirstName} ${res.data.User.LastName}`
                 SessionManager.setUserSession(res.data.Token, res.data.User.UserId, res.data.IsAuth, res.data.Role[0], userName);
+                setSubmitting(false);
 
                 
             }
@@ -141,6 +153,8 @@ const useApi = () => {
             let msg = authErrorHandler(error);
 
             setAuthMessage(msg);
+            setSubmitting(false);
+
         }
         
     }
@@ -373,41 +387,31 @@ const useApi = () => {
 
             const token = SessionManager.getToken();
             const user = SessionManager.getUser();
-    
-    
-            
-            const imageData = new FormData();
+            const image = data.productImage;
 
-            
-            imageData.append('file', data.data);
-            imageData.append('upload_preset', "skol-stained-glass");
-            imageData.append('cloud_name', "greenietec");
+            console.log(image);
 
-
-            let imgRes = await Api.post("https://api.cloudinary.com/v1_1/greenietec/image/upload", imageData);
-
-            if(imgRes.status === 200){
-
+            if(image.includes("kerryCo")){
 
 
                 const prdtData = {
 
                     productName: data.productName,
-                    description: data.description,
+                    description: data.description,                    
+                    productSlug: data.slug,
+                    id: user,                   
                     quantity: data.quantity,
                     unitPrice: parseFloat(data.unitPrice),
-                    productSlug: data.slug,
-                    id: user,
-                    publicId: imgRes.data.public_id,
-                    secureUrl: imgRes.data.secureUrl,
-                    url: imgRes.data.url,
-                    dimensions: data.dimensions
+                    ImageUrl: image,
+                    color: data.color,
+                    size: data.size,
+                    numberInPack: data.pack,
 
                 };
 
-    
-    
-                let res = await Api.post(`access-auth/business/admin/${user}/products/add-product`,                 
+
+
+                let res = await Api.post(`admin/${user}/products/edit-product`,                 
                     
                     JSON.stringify(prdtData),
                     {
@@ -435,9 +439,78 @@ const useApi = () => {
                 }
 
 
+                
 
+            }else{
+
+
+                      
+                const imageData = new FormData();
+
+                
+                imageData.append('file', image);
+                imageData.append('upload_preset', "kerryCo");
+                imageData.append('cloud_name', "greenietec");
+
+
+                let imgRes = await Api.post("https://api.cloudinary.com/v1_1/greenietec/image/upload", imageData);
+
+                if(imgRes.status === 200){
+
+
+
+                    const prdtData = {
+
+                        productName: data.productName,
+                        description: data.description,
+                        quantity: data.quantity,
+                        unitPrice: parseFloat(data.unitPrice),
+                        productSlug: data.slug,
+                        id: user,
+                        publicId: imgRes.data.public_id,
+                        secureUrl: imgRes.data.secureUrl,
+                        url: imgRes.data.url,
+                        dimensions: data.dimensions
+
+                    };
+
+        
+        
+                    let res = await Api.post(`access-auth/business/admin/${user}/products/add-product`,                 
+                        
+                        JSON.stringify(prdtData),
+                        {
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}`
+                            },
+                            withCredentials: true
+                        }
+                        
+                    );
+
+                    setPending(false);
+                    console.log(res);
+            
+                    if(res.status === 200){
+                        
+
+                        setPending(false);
+                        setMessage({...message, body: res.data.Message, type: res.data.StatusType });
+                        setModalOpen(true);
+
+                        
+            
+                    }
+
+
+
+
+                }
 
             }
+
+      
 
 
             
@@ -479,7 +552,9 @@ const useApi = () => {
         addAddress,
         authMessage,
         createProduct,
-        editProduct
+        editProduct,
+        submitting, 
+        setSubmitting
     }
 
 }

@@ -26,6 +26,7 @@ const useFetch = (url) => {
         const getData = async () => {
 
 
+            const token = SessionManager.getToken();
             const emptyData = [];
 
                     
@@ -35,8 +36,10 @@ const useFetch = (url) => {
                 let res = await Api.get(url, {
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                        
                     },
+                    withCredentials: true
                     
                 });
 
