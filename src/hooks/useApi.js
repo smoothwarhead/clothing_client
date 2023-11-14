@@ -319,9 +319,6 @@ const useApi = () => {
                     numberInPack: data.pack,
 
                 };
-
-
-                // console.log(prdtData);
     
     
                 let res = await Api.post(`admin/${user}/products/add-product`,                 
@@ -338,8 +335,7 @@ const useApi = () => {
                 );
 
                 setPending(false);
-                console.log(res);
-        
+               
                 if(res.status === 200){
                     
 
@@ -381,17 +377,17 @@ const useApi = () => {
     }
 
 
-    const editProduct = async (data) => {
+    const editProduct = async (data, id) => {
 
         try {
 
             const token = SessionManager.getToken();
-            const user = SessionManager.getUser();
             const image = data.productImage;
 
             console.log(image);
 
             if(image.includes("kerryCo")){
+                console.log("contains");
 
 
                 const prdtData = {
@@ -399,19 +395,21 @@ const useApi = () => {
                     productName: data.productName,
                     description: data.description,                    
                     productSlug: data.slug,
-                    id: user,                   
+                    id,                   
                     quantity: data.quantity,
                     unitPrice: parseFloat(data.unitPrice),
                     ImageUrl: image,
                     color: data.color,
                     size: data.size,
                     numberInPack: data.pack,
+                    prevImage: data.prevImage,
+                    deleteImage: false
 
                 };
 
 
 
-                let res = await Api.post(`admin/${user}/products/edit-product`,                 
+                let res = await Api.put(`admin/products/edit-product`,                 
                     
                     JSON.stringify(prdtData),
                     {
@@ -461,22 +459,28 @@ const useApi = () => {
 
                     const prdtData = {
 
+                  
+
                         productName: data.productName,
                         description: data.description,
                         quantity: data.quantity,
                         unitPrice: parseFloat(data.unitPrice),
                         productSlug: data.slug,
-                        id: user,
-                        publicId: imgRes.data.public_id,
+                        id,
+                        ImageUrl: imgRes.data.public_id,
                         secureUrl: imgRes.data.secureUrl,
                         url: imgRes.data.url,
-                        dimensions: data.dimensions
+                        color: data.color,
+                        size: data.size,
+                        numberInPack: data.pack,
+                        prevImage: data.prevImage,
+                        deleteImage: true
 
                     };
 
         
         
-                    let res = await Api.post(`access-auth/business/admin/${user}/products/add-product`,                 
+                    let res = await Api.put(`admin/products/edit-product`,                 
                         
                         JSON.stringify(prdtData),
                         {
@@ -537,6 +541,54 @@ const useApi = () => {
     }
 
 
+    const deleteProduct = async (id) => {
+
+        console.log("delete");
+        const token = SessionManager.getToken();
+        setPending(true);
+
+
+        try {
+
+
+            let res = await Api.delete(`admin/products/delete-product/${id}`,             
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    withCredentials: true
+                }
+                
+            );
+            
+
+            if(res.status === 200){
+               
+                setPending(false);
+                setMessage({...message, body: res.data.Message, type: res.data.StatusType });
+                setModalOpen(true);
+
+
+            }
+
+            
+        } catch (error) {
+
+            setPending(false);
+
+            let msg = dataErrorHandler(error, "product", true);
+
+            setMessage({...message, body: msg, type: "error" });
+            setModalOpen(true);
+
+            
+        }
+
+
+    }
+
+
 
     return {  
         logout, 
@@ -554,7 +606,8 @@ const useApi = () => {
         createProduct,
         editProduct,
         submitting, 
-        setSubmitting
+        setSubmitting,
+        deleteProduct
     }
 
 }

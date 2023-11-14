@@ -4,15 +4,15 @@ import './selected-product.css';
 import Button from '../../components/buttons/Button';
 import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
-import StringFormat from '../../utils/StringFormat';
-// import {scale} from "@cloudinary/url-gen/actions/resize";
-import useFetch from '../../hooks/useFetch';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { DataContext } from '../../context/DataContext';
 import Loader from '../../components/loader/Loader';
 import SessionManager from '../../utils/SessionManager';
 import useError from '../../hooks/useError';
 import { Api } from '../../api/axios';
+import useApi from '../../hooks/useApi';
+import Modal from '../../components/modals/Modal';
+import ConfirmationPage from '../../components/modals/ConfirmationPage';
 
 
 
@@ -28,11 +28,15 @@ const SelectedProduct = () => {
 
     const { id } = useParams();
 
+ 
     const { dataErrorHandler } = useError();
 
     const [gotoEditProduct, setGotoEditProduct] = useState(false);
 
-    const navigate = useNavigate();
+
+    const {deleteProduct} = useApi();
+
+
 
 
     // const [productId, setProductId] = useState("");
@@ -45,7 +49,7 @@ const SelectedProduct = () => {
     const [size, setSize] = useState("");
     const [pack, setPack] = useState("");
 
-    const { pending, setPending, setModalOpen, message, setMessage } = useContext(DataContext);
+    const { pending, setPending, setModalOpen, message, setMessage, deleteMode, setDeleteMode, isDeleted, setIsDeleted } = useContext(DataContext);
 
 
     console.log(id);
@@ -186,9 +190,6 @@ const SelectedProduct = () => {
         // navigate(`/admin/products/edit-product/${id}`);
     }
 
-    const deleteProduct = () => {
-
-    }
 
     if(gotoEditProduct){
         return <Navigate to={`/admin/products/edit-product/${id}`} />
@@ -210,11 +211,59 @@ const SelectedProduct = () => {
     // myImage.resize(scale().width(40).height(30));
 
 
+    const handleDelete = () => {
+        const msg = "Are you sure you want to delete this product?"
+        setMessage({...message, body: msg, type: "error" });
+        setDeleteMode(true);
+       
+    }
+
+    const handleOk = () => {
+        
+        deleteProduct(id);
+       
+
+    }
+
+    const handleDeleteOk = () => {
+        
+        return <Navigate to={`/admin/products`} />
+               
+
+    }
+
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        setDeleteMode(false);
+    }
+
+    const handleCloseDeleteModal = () => {
+        setModalOpen(false);
+        setDeleteMode(false);
+        setIsDeleted(false);
+    }
 
 
 
   return (
     <>
+        { deleteMode &&
+            <Modal                     
+                modalBody={ <ConfirmationPage handleOk={handleOk} doubleBtn={true} /> }
+                modalType={message.type}
+                closeModal={handleCloseModal}
+                
+            />
+        }
+        { isDeleted &&
+            <Modal                     
+                modalBody={ <ConfirmationPage handleOk={handleDeleteOk} doubleBtn={false} /> }
+                modalType={message.type}
+                closeModal={handleCloseDeleteModal}
+                
+            />
+        }
         {pending && <Loader />}
 
         {!pending &&
@@ -237,7 +286,7 @@ const SelectedProduct = () => {
                         <Button 
                             hasIcon={false} 
                             btnText= "Delete Product"
-                            action={deleteProduct}
+                            action={handleDelete}
                             isActive={true}
                             Icon={null}
 

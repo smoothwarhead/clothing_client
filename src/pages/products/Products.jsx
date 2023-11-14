@@ -81,16 +81,7 @@ const Products = () => {
       {pending && <Loader/> }
       {!pending &&
         <>
-          { 
-            deleteMode && 
-            <Modal                     
-              modalBody={ <ConfirmationPage handleOk={handleProductDelete} doubleBtn={true} /> }
-              modalType={message.type}
-              closeModal={handleDeleteModal}
-                
-            />
-          }
-
+          
           { 
             openDetails && 
             <Modal                     

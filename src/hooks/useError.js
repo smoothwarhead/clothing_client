@@ -109,7 +109,7 @@ const useError = () => {
         if(error.code === "ERR_BAD_REQUEST"){
 
 
-            msg =  post ? `${entity} could not be created at the moment. please check the credentials`  : "This page can not be found";
+            msg =  post ? `${entity} could not be created/updated at the moment. please check the credentials`  : "This page can not be found";
             return msg;   
                         
         }

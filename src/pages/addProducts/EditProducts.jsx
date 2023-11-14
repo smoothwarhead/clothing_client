@@ -26,8 +26,6 @@ import { hasEmptyKey } from "../../utils/methods";
 
 
 
-
-
 // const initialValues = {
 //     productName: "",
 //     description: "",
@@ -59,12 +57,12 @@ const EditProducts = () => {
   const [color, setColor] = useState("");
   const [size, setSize] = useState("");
   const [pack, setPack] = useState("");
-  const [pictureData, setPictureData] = useState("");
+  const [prevImage, setPrevImage] = useState("");
 
 
 
 
-  const { setModalOpen, message } = useContext(DataContext);
+  const { modalOpen, setModalOpen, message } = useContext(DataContext);
   const { setLoggedIn } = useContext(AuthContext);    
 
   const { editProduct } = useApi();
@@ -118,17 +116,17 @@ const EditProducts = () => {
   }
 
   const handleColor = (e) => {
-    setUnitPrice(e.target.value);
+    setColor(e.target.value);
 
   }
 
   const handleSize = (e) => {
-    setUnitPrice(e.target.value);
+    setSize(e.target.value);
 
   }
 
   const handlePack = (e) => {
-    setUnitPrice(e.target.value);
+    setPack(e.target.value);
 
   }
 
@@ -232,6 +230,7 @@ useEffect(() => {
                 setUnitPrice(parseFloat(res.data.Variations[0].UnitPrice).toFixed(2).toString());
                 setQuantity(res.data.Variations[0].Quantity);
                 setProductImage(res.data.Variations[0].ImageUrl);
+                setPrevImage(res.data.Variations[0].ImageUrl);
                 setColor(res.data.Variations[0].Color);
                 setSize(res.data.Variations[0].Size);
                 setPack(res.data.Variations[0].NumberInPack);
@@ -369,7 +368,7 @@ const handleIconClick = () => {
 
 const saveProduct = () => {
 
-    const fileData = { productName, description, quantity, unitPrice, color, size, pack,  productImage, slug: productName?.split(" ").join("-").toLowerCase() };
+    const fileData = { productName, description, quantity, unitPrice, prevImage, color, size, pack,  productImage, slug: productName?.split(" ").join("-").toLowerCase() };
     
 
     if(hasEmptyKey(fileData))
@@ -378,10 +377,12 @@ const saveProduct = () => {
     }
     else{
 
-      console.log(fileData);
+    //   console.log(fileData);
 
 
       setPending(true);
+
+      editProduct(fileData, id);
     
 
     }
@@ -393,6 +394,14 @@ const saveProduct = () => {
   return (
 
     <>
+        { modalOpen &&
+            <Modal                     
+                modalBody={ <ConfirmationPage handleOk={handleOk} /> }
+                modalType={message.type}
+                closeModal={handleCloseModal}
+                
+            />
+        }
         <div className="dash-page">
 
             <div className="dash-top">

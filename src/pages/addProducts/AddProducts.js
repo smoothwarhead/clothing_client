@@ -150,8 +150,8 @@ const AddProducts = () => {
 
       setPending(true);
 
-      console.log(fileData);
-      // createProduct(fileData);
+      
+      createProduct(fileData);
 
 
 

@@ -1,7 +1,10 @@
 import { useContext } from 'react'
 import './action-dropdown.css'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { DataContext } from '../../context/DataContext'
+import Modal from '../modals/Modal'
+import useApi from '../../hooks/useApi'
+import ConfirmationPage from '../modals/ConfirmationPage'
 
 
 
@@ -10,7 +13,9 @@ import { DataContext } from '../../context/DataContext'
 
 const ActionDropDown = ({ product }) => {
 
-    const { message, setMessage, setDeleteMode } = useContext(DataContext);
+    const {isDeleted, setIsDeleted, deleteMode, setModalOpen, message, setMessage, setDeleteMode } = useContext(DataContext);
+
+    const { deleteProduct } = useApi();
 
     const navigate = useNavigate();
 
@@ -23,10 +28,59 @@ const ActionDropDown = ({ product }) => {
         const msg = "Are you sure you want to delete this product?"
         setMessage({...message, body: msg, type: "error" });
         setDeleteMode(true);
+       
     }
+
+    const handleOk = () => {
+        
+        deleteProduct(product.ProductId);
+       
+
+    }
+
+
+    const handleCloseModal = () => {
+        setModalOpen(false);
+        setDeleteMode(false);
+    }
+
+    const handleDeleteOk = () => {
+        
+        return <Navigate to={`/admin/products`} />
+               
+
+    }
+
+    const handleCloseDeleteModal = () => {
+        setModalOpen(false);
+        setDeleteMode(false);
+        setIsDeleted(false);
+    }
+
+
+
 
   return (
     <>
+
+        
+        { deleteMode &&
+            <Modal                     
+                modalBody={ <ConfirmationPage handleOk={handleOk} doubleBtn={true} /> }
+                modalType={message.type}
+                closeModal={handleCloseModal}
+                
+            />
+        }
+        { isDeleted &&
+            <Modal                     
+                modalBody={ <ConfirmationPage handleOk={handleDeleteOk} doubleBtn={false} /> }
+                modalType={message.type}
+                closeModal={handleCloseDeleteModal}
+                
+            />
+        }
+
         <div className="action-d-con">
 
             <div className="action-links" onClick={handleEdit}>Edit</div>
@@ -37,6 +91,7 @@ const ActionDropDown = ({ product }) => {
     
     </>
   )
+
 }
 
 export default ActionDropDown;

@@ -9,6 +9,7 @@ const DataProvider = ({ children }) => {
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteMode, setDeleteMode] = useState(false);
     const [openDetails, setOpenDetails] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
 
     const [pending, setPending] = useState(false);
     const [productReload, setProductReload] = useState(false);
@@ -42,7 +43,8 @@ const DataProvider = ({ children }) => {
         setProductReload,
         openDetails, setOpenDetails,
         deleteMode, setDeleteMode,
-        selectedProduct, setSelectedProduct
+        selectedProduct, setSelectedProduct,
+        isDeleted, setIsDeleted
 
     }}
     >

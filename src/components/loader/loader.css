@@ -1,19 +1,20 @@
 .loader-con{
-    width: 100%;
-    height: 100%;
+    width: 50%;
+    height: 70%;
     background: transparent;
-    position: absolute;
+    margin: auto;
     z-index: 2000;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: 'Cinzel', serif;
+    font-family: 'Montserrat', sans-serif;
+    /* border: 1px solid red; */
 
 }
 
 .loading-text{
-    color: #000;
-    font-size: 2.25em;
+    color: #db2693;
+    font-size: 2em;
     font-weight: 500;
     opacity: .7;
 }
