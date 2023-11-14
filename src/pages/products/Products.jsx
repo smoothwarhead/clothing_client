@@ -14,7 +14,6 @@ import { BiPlus } from 'react-icons/bi';
 import useMediaQuery from '../../hooks/useMediaQuery';
 import { DataContext } from '../../context/DataContext';
 import Modal from '../../components/modals/Modal';
-import ConfirmationPage from '../../components/modals/ConfirmationPage';
 import Loader from '../../components/loader/Loader'
 
 
@@ -26,7 +25,7 @@ const Products = () => {
 
   const{ data: products } = useFetch(`/admin/products`);
 
-  const { openDetails, setOpenDetails, deleteMode, setDeleteMode, message, pending } = useContext(DataContext);
+  const { openDetails, setOpenDetails, pending } = useContext(DataContext);
 
 
   
@@ -60,16 +59,6 @@ const Products = () => {
     navigate("/admin/products/add-product", {replace: false});
   };
 
-
-
-  const handleProductDelete = () => {
-    setDeleteMode(false);
-    navigate("/admin/products");    
-  }
-
-  const handleDeleteModal = () => {
-    setDeleteMode(false);
-  }
 
   const handleDetailsModal = () => {
     setOpenDetails(false);

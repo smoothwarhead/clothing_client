@@ -4,7 +4,6 @@ import { DataContext } from "../../context/DataContext";
 import useApi from "../../hooks/useApi";
 import { useContext, useEffect, useState } from 'react';
 import Button from "../../components/buttons/Button";
-import { productInputs } from "../../utils/inputs";
 import './addProducts.css';
 // import ProductInput from '../../components/ProductInput';
 import { BsFillCloudArrowUpFill } from 'react-icons/bs';
