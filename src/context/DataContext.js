@@ -1,4 +1,5 @@
 import { createContext, useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 export const DataContext = createContext({});
 
@@ -15,6 +16,7 @@ const DataProvider = ({ children }) => {
     const [productReload, setProductReload] = useState(false);
     const [appAdmin, setAppAdmin] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [completed, setCompleted] = useState(false);
 
 
     const [message, setMessage] = useState({
@@ -22,10 +24,12 @@ const DataProvider = ({ children }) => {
         type: ""
     });
 
+
     const closeModal = () => {
         setModalOpen(false);
     }
 
+    
    
 
   return (
@@ -44,7 +48,8 @@ const DataProvider = ({ children }) => {
         openDetails, setOpenDetails,
         deleteMode, setDeleteMode,
         selectedProduct, setSelectedProduct,
-        isDeleted, setIsDeleted
+        isDeleted, setIsDeleted,
+        completed, setCompleted
 
     }}
     >

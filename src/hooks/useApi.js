@@ -19,7 +19,7 @@ const useApi = () => {
     const { setLoggedIn, setUser } = useContext(AuthContext);
     const [open2fa, setOpen2fa] = useState(false);
     const [twoFaEmail, setTwoFaEmail] = useState("");
-    const { message, setMessage, setModalOpen, setPending } = useContext(DataContext);
+    const { message, setMessage, setModalOpen, setPending, setCompleted } = useContext(DataContext);
 
     const { authErrorHandler, dataErrorHandler } = useError();
 
@@ -341,7 +341,7 @@ const useApi = () => {
 
                     setPending(false);
                     setMessage({...message, body: res.data.Message, type: res.data.StatusType });
-                    setModalOpen(true);
+                    setCompleted(true);
 
                     
         
@@ -361,7 +361,7 @@ const useApi = () => {
             let msg = dataErrorHandler(error, "product", true);
 
             setMessage({...message, body: msg, type: "error" });
-            setModalOpen(true);
+            setCompleted(true);
 
             
             
@@ -384,12 +384,8 @@ const useApi = () => {
             const token = SessionManager.getToken();
             const image = data.productImage;
 
-            console.log(image);
-
             if(image.includes("kerryCo")){
-                console.log("contains");
-
-
+               
                 const prdtData = {
 
                     productName: data.productName,
@@ -409,7 +405,7 @@ const useApi = () => {
 
 
 
-                let res = await Api.put(`admin/products/edit-product`,                 
+                let res = await Api.put(`admin/products/edit-product/${id.toString()}`,                 
                     
                     JSON.stringify(prdtData),
                     {
@@ -423,14 +419,14 @@ const useApi = () => {
                 );
 
                 setPending(false);
-                console.log(res);
+             
         
                 if(res.status === 200){
                     
 
                     setPending(false);
                     setMessage({...message, body: res.data.Message, type: res.data.StatusType });
-                    setModalOpen(true);
+                    setCompleted(true);
 
                     
         
@@ -480,7 +476,7 @@ const useApi = () => {
 
         
         
-                    let res = await Api.put(`admin/products/edit-product`,                 
+                    let res = await Api.put(`admin/products/edit-product/${id.toString()}`,                 
                         
                         JSON.stringify(prdtData),
                         {
@@ -501,7 +497,8 @@ const useApi = () => {
 
                         setPending(false);
                         setMessage({...message, body: res.data.Message, type: res.data.StatusType });
-                        setModalOpen(true);
+                        setCompleted(true);
+
 
                         
             
@@ -525,7 +522,7 @@ const useApi = () => {
             let msg = dataErrorHandler(error, "product", true);
 
             setMessage({...message, body: msg, type: "error" });
-            setModalOpen(true);
+            setCompleted(true);
 
             
             
@@ -567,7 +564,7 @@ const useApi = () => {
                
                 setPending(false);
                 setMessage({...message, body: res.data.Message, type: res.data.StatusType });
-                setModalOpen(true);
+                setCompleted(true);
 
 
             }
@@ -580,7 +577,8 @@ const useApi = () => {
             let msg = dataErrorHandler(error, "product", true);
 
             setMessage({...message, body: msg, type: "error" });
-            setModalOpen(true);
+            setCompleted(true);
+
 
             
         }

@@ -3,7 +3,7 @@ import './products.css';
 import '../../pages/dashboard/dashboard.css';
 import ProductTable from '../../components/products/productTable/ProductTable';
 import ProductGrid from '../../components/products/productGrid/ProductGrid';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 // import PlusIcon from '../../../files/svgs/PlusIcon';
 import { RxCaretDown, RxCaretUp } from 'react-icons/rx';
 import MobileProductTable from '../../components/products/productTable/MobileProductTable';
@@ -25,7 +25,7 @@ const Products = () => {
 
   const{ data: products } = useFetch(`/admin/products`);
 
-  const { openDetails, setOpenDetails, pending } = useContext(DataContext);
+  const { openDetails, setOpenDetails, pending, setModalOpen, setDeleteMode } = useContext(DataContext);
 
 
   
@@ -63,6 +63,12 @@ const Products = () => {
   const handleDetailsModal = () => {
     setOpenDetails(false);
   }
+
+
+  useEffect(() => {
+    setModalOpen(false);
+    setDeleteMode(false)
+  }, [setModalOpen, setDeleteMode])
 
 
   return (

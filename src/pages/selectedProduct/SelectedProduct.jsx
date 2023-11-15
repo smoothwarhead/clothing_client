@@ -49,43 +49,8 @@ const SelectedProduct = () => {
     const [size, setSize] = useState("");
     const [pack, setPack] = useState("");
 
-    const { pending, setPending, setModalOpen, message, setMessage, deleteMode, setDeleteMode, isDeleted, setIsDeleted } = useContext(DataContext);
+    const { pending, setPending, setModalOpen, message, setMessage, deleteMode, setDeleteMode } = useContext(DataContext);
 
-
-    console.log(id);
-    
-
-    // useEffect(() => {
-
-    //     const data = {
-
-    //         ProductId: "0b2fbdf5-b8ec-4459-f4ce-08dbdb48842f",
-    //         ProductName: "Tape recorder",
-    //         ProductDescription: "With axios, you can use the default settings and also track the upload progress like in the example below:",
-    //         CreatedDate: "2023-11-01T21:07:50.4544521",
-    //         ModifiedDate: "2023-11-01T21:07:50.4546654",
-    //         ProductSlug: "tape-recorder",
-    //         Variations: [
-    //             {
-    //                 "Size": "M",
-    //                 "Color": "Blue",
-    //                 "NumberInPack": "9",
-    //                 "ImageUrl": "kerryCo/vyohav6vdtecky5co77s",
-    //                 "Quantity": "3",
-    //                 "UnitPrice": 5
-    //             }
-    //         ],
-    //         Admin: {
-    //             "AdminId": "3f078e8f-dcae-4454-b22d-08dbdb23e9d4",
-    //             "FirstName": "Skala",
-    //             "LastName": "Dudley"
-    //         }
-
-    //     }
-
-    //     setProduct(data);
-
-    // },[setProduct])
 
   
     useEffect(() => {
@@ -225,25 +190,11 @@ const SelectedProduct = () => {
 
     }
 
-    const handleDeleteOk = () => {
-        
-        return <Navigate to={`/admin/products`} />
-               
-
-    }
-
 
     const handleCloseModal = () => {
         setModalOpen(false);
         setDeleteMode(false);
     }
-
-    const handleCloseDeleteModal = () => {
-        setModalOpen(false);
-        setDeleteMode(false);
-        setIsDeleted(false);
-    }
-
 
 
   return (
@@ -256,14 +207,7 @@ const SelectedProduct = () => {
                 
             />
         }
-        { isDeleted &&
-            <Modal                     
-                modalBody={ <ConfirmationPage handleOk={handleDeleteOk} doubleBtn={false} /> }
-                modalType={message.type}
-                closeModal={handleCloseDeleteModal}
-                
-            />
-        }
+       
         {pending && <Loader />}
 
         {!pending &&

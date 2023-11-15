@@ -87,15 +87,6 @@ const EditProducts = () => {
   const navigate = useNavigate();
 
 
-//   const handleChange = (e) => {
-
-//     setValues({ ...values, [e.target.name]: e.target.value});   
-
-//   }
-
-
-  
-
 
   const handleProductName = (e) => {
 
@@ -375,8 +366,6 @@ const saveProduct = () => {
       setError(true);
     }
     else{
-
-    //   console.log(fileData);
 
 
       setPending(true);

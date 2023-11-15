@@ -64,12 +64,12 @@ function App() {
 
           {/* admin private routes */}
 
-          <Route element={<PersistLogin />}> 
+          {/* <Route element={<PersistLogin />}>  */}
 
             <Route path="/" element={ <DashboardLayout /> }>
 
               
-              <Route element={<RequireAuth allowedRoles={["SuperAdmin", "Staff"]} />}>
+              {/* <Route element={<RequireAuth allowedRoles={["SuperAdmin", "Staff"]} />}> */}
 
                 <Route path="/" element={ <Navigate to="/admin" /> } /> 
                 <Route path="/admin" element={ <Dashboard /> } /> 
@@ -89,11 +89,11 @@ function App() {
                 {/* <Route path="transactions" element={ <Transactions /> } />  */}
 
 
-              </Route>
+              {/* </Route> */}
 
             </Route>
 
-          </Route>
+          {/* </Route> */}
 
 
         </Routes>
