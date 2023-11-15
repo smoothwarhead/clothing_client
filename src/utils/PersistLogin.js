@@ -19,11 +19,8 @@ const PersistLogin = () => {
         const verifyRefresh = async ( ) => {
             try {
               
-                console.log("refreshing");
                 const currentUser = SessionManager.getUser();
                 const isAuth = SessionManager.getAuth();
-
-                console.log(currentUser);
 
                 setUser(currentUser);
                 setLoggedIn(isAuth);

@@ -17,7 +17,7 @@ const OneProductRecord = ({ product }) => {
     const [showActions, setShowActions] = useState(false);
     const [hovered, setHovered] = useState(false);
 
-    // const { setOpenDetails, setSelectedProduct } = useContext(DataContext);
+    const { setPending } = useContext(DataContext);
 
     const navigate = useNavigate();
 
@@ -45,10 +45,10 @@ const OneProductRecord = ({ product }) => {
     }
 
     const handleSelect = () => {
+        setPending(true);
+
         navigate(`/admin/products/product/${product.ProductId}`);
 
-        // setOpenDetails(true);
-        // setSelectedProduct(product);
     }
 
 
@@ -76,7 +76,7 @@ const OneProductRecord = ({ product }) => {
                 <div className="product-elements product-title-name">{StringFormat.truncateWord(product?.ProductName)}</div>
                 <div className="product-elements product-title-desc">{StringFormat.truncateWord(product?.ProductDescription, 50)}</div>
                 <div className="product-elements product-title-qty">{product?.Variations[0].Quantity}</div>
-                <div className="product-elements product-title-price">{`$ ${parseFloat(product?.Variations[0].UnitPrice).toFixed(2).toString()}`}</div>
+                <div className="product-elements product-title-price">{`£${parseFloat(product?.Variations[0].UnitPrice).toFixed(2).toString()}`}</div>
                 <div className="product-elements product-title-action">
                     <div className="prdt-icon-con" onClick={handleActionBtn}>
                         <ActionIcon className="prdt-icon" />

@@ -139,7 +139,6 @@ const AddProducts = () => {
   const addProduct = () => {
 
     const fileData = {...values, productImage: file.file, slug: values.productName?.split(" ").join("-").toLowerCase() };
-    console.log(fileData);
 
 
     if(hasEmptyKey(fileData))

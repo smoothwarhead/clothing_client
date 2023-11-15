@@ -61,7 +61,7 @@ const EditProducts = () => {
 
 
 
-  const { modalOpen, setModalOpen, message } = useContext(DataContext);
+  const {editMode, modalOpen, setModalOpen, message } = useContext(DataContext);
   const { setLoggedIn } = useContext(AuthContext);    
 
   const { editProduct } = useApi();
@@ -186,124 +186,128 @@ const EditProducts = () => {
 
 useEffect(() => {
 
-
-      
-    const getProduct = async () => 
-    {
-
-        const token = SessionManager.getToken();
-        // const user = SessionManager.getUser();
-
-        setPending(true);
-        setIsEdit(true);
-
-        try {
-
-            let res = await Api.get(`/admin/products/product/${id}`, {
-
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                withCredentials: true
-
-            });
-
-            console.log(res);
-
-            if(res.status === 200){
-
-                setPending(false);
-                setProductName(res.data.ProductName);
-                setDescription(res.data.ProductDescription);
-                setSlug(res.data.ProductSlug);
-                setUnitPrice(parseFloat(res.data.Variations[0].UnitPrice).toFixed(2).toString());
-                setQuantity(res.data.Variations[0].Quantity);
-                setProductImage(res.data.Variations[0].ImageUrl);
-                setPrevImage(res.data.Variations[0].ImageUrl);
-                setColor(res.data.Variations[0].Color);
-                setSize(res.data.Variations[0].Size);
-                setPack(res.data.Variations[0].NumberInPack);
-
-                    
-            }
-            
-        } catch (error) {
-            console.log(error);
-            setPending(false);        
-
-            let msg;
-
-            if(error.response.status === 400){
-            
-                msg =  error.response.data.Message; 
-                return msg;             
-            }
-
-            if(error.code === "ERR_BAD_REQUEST"){
-
-                setLoggedIn(false);
-                
-                SessionManager.removeUserSession();
-
-                msg =  error.response.data.Message; 
-                return msg;   
-                            
-            }
-
-            if(error.response.status === 401){
-
-                setLoggedIn(false);
-                SessionManager.removeUserSession();
-                
-                msg =  "User not authorized. Please provide the correct credential"; 
-                return msg;   
-                            
-            }
-
-            if(error.response.status === 403){
-
-                setLoggedIn(false);   
-                SessionManager.removeUserSession();
-
-                
-                msg =  "User forbidden to view this page. Please provide the correct credential"; 
-                return msg; 
-
-
-            }
-
-            if(error.response.status === 404){
-            
-                msg =  "This page can not be found"; 
-                return msg; 
-                
-            }
-
-            if(error.response.status === 500){
-                
-                msg =  "This is an invalid request"; 
-                return msg; 
-                
-            }
-
-            if(error.response.status === 503 || error.code === "ERR_NETWORK"){
-            
-                msg =  "Inconsistent network !!!"; 
-                return msg;
-                
-            }
-            
-        }
-
-        
-
+    if(!editMode){
+        return
     }
 
-    getProduct();
+    else{
+        
+        const getProduct = async () => 
+        {
+
+            const token = SessionManager.getToken();
+            // const user = SessionManager.getUser();
+
+            setPending(true);
+            setIsEdit(true);
+
+            try {
+
+                let res = await Api.get(`/admin/products/product/${id}`, {
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    withCredentials: true
+
+                });
+
+           
+
+                if(res.status === 200){
+
+                    setPending(false);
+                    setProductName(res.data.ProductName);
+                    setDescription(res.data.ProductDescription);
+                    setSlug(res.data.ProductSlug);
+                    setUnitPrice(parseFloat(res.data.Variations[0].UnitPrice).toFixed(2).toString());
+                    setQuantity(res.data.Variations[0].Quantity);
+                    setProductImage(res.data.Variations[0].ImageUrl);
+                    setPrevImage(res.data.Variations[0].ImageUrl);
+                    setColor(res.data.Variations[0].Color);
+                    setSize(res.data.Variations[0].Size);
+                    setPack(res.data.Variations[0].NumberInPack);
+
+                        
+                }
+                
+            } catch (error) {
+            
+                setPending(false);        
+
+                let msg;
+
+                if(error.response.status === 400){
+                
+                    msg =  error.response.data.Message; 
+                    return msg;             
+                }
+
+                if(error.code === "ERR_BAD_REQUEST"){
+
+                    setLoggedIn(false);
+                    
+                    SessionManager.removeUserSession();
+
+                    msg =  error.response.data.Message; 
+                    return msg;   
+                                
+                }
+
+                if(error.response.status === 401){
+
+                    setLoggedIn(false);
+                    SessionManager.removeUserSession();
+                    
+                    msg =  "User not authorized. Please provide the correct credential"; 
+                    return msg;   
+                                
+                }
+
+                if(error.response.status === 403){
+
+                    setLoggedIn(false);   
+                    SessionManager.removeUserSession();
+
+                    
+                    msg =  "User forbidden to view this page. Please provide the correct credential"; 
+                    return msg; 
 
 
-}, [id, message, setLoggedIn]);
+                }
+
+                if(error.response.status === 404){
+                
+                    msg =  "This page can not be found"; 
+                    return msg; 
+                    
+                }
+
+                if(error.response.status === 500){
+                    
+                    msg =  "This is an invalid request"; 
+                    return msg; 
+                    
+                }
+
+                if(error.response.status === 503 || error.code === "ERR_NETWORK"){
+                
+                    msg =  "Inconsistent network !!!"; 
+                    return msg;
+                    
+                }
+                
+            }
+
+            
+
+        }
+
+        getProduct();
+    }
+
+}, [editMode, id, message, setLoggedIn]);
 
 
 
@@ -316,7 +320,7 @@ useEffect(() => {
     }
 
 
-}, [profilePicture, setShowImage, setShowUploadBtn, isChange, isEdit]);
+}, [editMode, profilePicture, setShowImage, setShowUploadBtn, isChange, isEdit]);
 
 
 

@@ -19,7 +19,9 @@ const useApi = () => {
     const { setLoggedIn, setUser } = useContext(AuthContext);
     const [open2fa, setOpen2fa] = useState(false);
     const [twoFaEmail, setTwoFaEmail] = useState("");
-    const { message, setMessage, setModalOpen, setPending, setCompleted } = useContext(DataContext);
+   
+    
+    const {setEditMode, message, setMessage, setModalOpen, setPending, setCompleted } = useContext(DataContext);
 
     const { authErrorHandler, dataErrorHandler } = useError();
 
@@ -51,7 +53,7 @@ const useApi = () => {
                 }
             );
 
-            console.log(res);
+    
 
             if(res.status === 200){
                
@@ -93,8 +95,7 @@ const useApi = () => {
                 
 
             if(res.status === 200){
-                console.log(res);
-
+                
                 setOpen2fa(res.data.Is2fa);
              
                 setTwoFaEmail(res.data.Email);
@@ -137,9 +138,7 @@ const useApi = () => {
             if(res.status === 200){
             
                 setLoggedIn(res.data.IsAuth); 
-                console.log(res);
-
-
+               
                 const userName = `${res.data.User.FirstName} ${res.data.User.LastName}`
                 SessionManager.setUserSession(res.data.Token, res.data.User.UserId, res.data.IsAuth, res.data.Role[0], userName);
                 setSubmitting(false);
@@ -183,7 +182,6 @@ const useApi = () => {
 
             if(res.status === 200){
                 
-                console.log(res);
 
                 if(res.status === 200){
                
@@ -209,7 +207,6 @@ const useApi = () => {
 
         try {
 
-            // console.log(data);
 
             const token = SessionManager.getToken();
             
@@ -229,9 +226,7 @@ const useApi = () => {
            
 
             if(res.status === 200){
-                
-                console.log(res);
-
+ 
                 if(res.status === 200){
                
                     setMessage({...message, body: res.data.Message, type: res.data.StatusType });
@@ -381,6 +376,8 @@ const useApi = () => {
 
         try {
 
+            setEditMode(false);
+
             const token = SessionManager.getToken();
             const image = data.productImage;
 
@@ -490,8 +487,7 @@ const useApi = () => {
                     );
 
                     setPending(false);
-                    console.log(res);
-            
+                   
                     if(res.status === 200){
                         
 
@@ -540,7 +536,6 @@ const useApi = () => {
 
     const deleteProduct = async (id) => {
 
-        console.log("delete");
         const token = SessionManager.getToken();
         setPending(true);
 

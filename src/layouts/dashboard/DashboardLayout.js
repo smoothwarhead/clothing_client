@@ -1,4 +1,4 @@
-import { Navigate, Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import './dashboardLayout.css';
 import SideBar from '../../components/sidebar/SideBar';
 import TopBar from '../../components/topbar/TopBar';
@@ -12,15 +12,17 @@ import ConfirmationPage from '../../components/modals/ConfirmationPage';
 
 const DashboardLayout = () => {
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const { completed, setModalOpen, setDeleteMode, closeModal, message } = useContext(DataContext);
+  const { completed, setModalOpen, setCompleted, setDeleteMode, closeModal, message } = useContext(DataContext);
 
   const confirm = () => {
 
     setModalOpen(false);
+    setCompleted(false);
     setDeleteMode(false);
-    return <Navigate to="admin/products" replace={true}/>
+    navigate(-1);
+    // return <Navigate to="admin/products" replace={true}/>
 
   }
 

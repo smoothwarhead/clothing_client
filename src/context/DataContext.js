@@ -1,5 +1,5 @@
 import { createContext, useState } from "react"
-import { useNavigate } from "react-router-dom";
+
 
 export const DataContext = createContext({});
 
@@ -9,6 +9,7 @@ const DataProvider = ({ children }) => {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [deleteMode, setDeleteMode] = useState(false);
+    const [editMode, setEditMode] = useState(false);
     const [openDetails, setOpenDetails] = useState(false);
     const [isDeleted, setIsDeleted] = useState(false);
 
@@ -49,7 +50,8 @@ const DataProvider = ({ children }) => {
         deleteMode, setDeleteMode,
         selectedProduct, setSelectedProduct,
         isDeleted, setIsDeleted,
-        completed, setCompleted
+        completed, setCompleted,
+        editMode, setEditMode
 
     }}
     >

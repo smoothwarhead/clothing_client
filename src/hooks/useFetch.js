@@ -45,7 +45,6 @@ const useFetch = (url) => {
 
                 setPending(true);
 
-               console.log(res);
 
                 if(res.status === 200){
                     setData(res.data);    
@@ -68,7 +67,6 @@ const useFetch = (url) => {
 
                 
             } catch (error) {
-                console.log(error);
                 setPending(false);               
                 
 

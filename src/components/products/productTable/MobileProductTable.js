@@ -2,12 +2,18 @@ import {AdvancedImage} from '@cloudinary/react';
 import {Cloudinary} from "@cloudinary/url-gen";
 import './mobile-product-table.css';
 import StringFormat from '../../../utils/StringFormat';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { DataContext } from '../../../context/DataContext';
 
 
 
 const MobileProductTable = ({ product }) => {
 
 
+    const navigate = useNavigate();
+
+    const { message, setEditMode, setMessage, setDeleteMode } = useContext(DataContext);
 
 
     // Create and configure your Cloudinary instance.
@@ -24,105 +30,125 @@ const MobileProductTable = ({ product }) => {
     // myImage.resize(scale().width(40).height(30));
 
 
+    const handleEdit = () => {
+        setEditMode(true);
+        navigate(`/admin/products/edit-product/${product.ProductId}`);
+
+    }
+
+    const handleDelete = () => {
+        const msg = "Are you sure you want to delete this product?"
+        setMessage({...message, body: msg, type: "error" });
+        setDeleteMode(true);
+       
+    }
 
 
 
   return (
-    <div className='mobile-prdt-table-container'>
-        <div className="mobile-prdt-table-flex-container">
 
-            <div className="mobile-prdt-table-flex-container-left">
-                <div className="mobile-prdt-el mobile-prdt-el-image">
-                    <div className="mobile-prdt-img">                
-                        <AdvancedImage style={{maxWidth: '100%', maxHeight: '100%'}} cldImg={myImage}/>                    
+    <>
+        <div className='mobile-prdt-table-container'>
+
+            <div className="mobile-prdt-table-flex-container">
+
+                <div className="mobile-prdt-table-flex-container-left">
+                    <div className="mobile-prdt-el mobile-prdt-el-image">
+                        <div className="mobile-prdt-img">                
+                            <AdvancedImage style={{maxWidth: '100%', maxHeight: '100%'}} cldImg={myImage}/>                    
+                        
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div className="mobile-prdt-table-flex-container-right">
+
+                    <div className="mobile-prdt-table-flex-container-right-el right-el-1">
+
+                        <div className="mobile-prdt-el mobile-prdt-el-name">{product.ProductName}</div>
+                        {/* <div className="mobile-prdt-el mobile-prdt-el-desc">{product.ProductDescription}</div> */}
+                        <div className="mobile-prdt-el mobile-prdt-el-desc">{StringFormat.truncateWord(product?.ProductDescription, 100)}</div>
+
+
+                    </div>
+
+                    <div className="mobile-prdt-table-flex-container-right-el right-el-2">
+
+
+
+                        <div className="right-el-2-els-1">
+
+                            <div className="right-el-2-els-flex">
+                                <div className="mobile-prdt-title mobile-prdt-name">Quantity:</div>
+                                <div className="right-el-2-els-flex-els">{product.Variations[0].Quantity}</div>
+                            </div>
+
+                            <div className="right-el-2-els-flex">
+                                <div className="mobile-prdt-title mobile-prdt-name">Price:</div>
+                                <div className="right-el-2-els-flex-els">{`£${parseFloat(product?.Variations[0].UnitPrice).toFixed(2).toString()}`}</div>
+
+                            </div>
+
+                            <div className="right-el-2-els-flex">
+                                <div className="mobile-prdt-title mobile-prdt-name">Color:</div>
+                                <div className="right-el-2-els-flex-els">{product.Variations[0].Color}</div>
+                            </div>
+
+
+
+                        </div>
+
+
+
+                        <div className="right-el-2-els-2">
+
+                            <div className="right-el-2-els-flex">
+                                <div className="mobile-prdt-title mobile-prdt-name">Number in Pack:</div>
+                                <div className="right-el-2-els-flex-els">{product.Variations[0].NumberInPack}</div>
+                            </div>
+
+                            <div className="right-el-2-els-flex">
+                                <div className="mobile-prdt-title mobile-prdt-name">Size:</div>
+                                <div className="right-el-2-els-flex-els">{product.Variations[0].Size}</div>
+                            </div>
+
+                        </div>
+
                     
+
                     </div>
-                </div>
 
-            </div>
+                    <div className="mobile-prdt-table-flex-container-right-el mobile-con-btn-flex">
 
+                        <div 
+                            className='mobile-con-btns mobile-prdt-btn-edit'
+                            onClick={handleEdit}
 
-            <div className="mobile-prdt-table-flex-container-right">
-
-                <div className="mobile-prdt-table-flex-container-right-el right-el-1">
-
-                    <div className="mobile-prdt-el mobile-prdt-el-name">{product.ProductName}</div>
-                    {/* <div className="mobile-prdt-el mobile-prdt-el-desc">{product.ProductDescription}</div> */}
-                    <div className="mobile-prdt-el mobile-prdt-el-desc">{StringFormat.truncateWord(product?.ProductDescription, 100)}</div>
-
-
-                </div>
-
-                <div className="mobile-prdt-table-flex-container-right-el right-el-2">
-
-
-
-                    <div className="right-el-2-els-1">
-
-                        <div className="right-el-2-els-flex">
-                            <div className="mobile-prdt-title mobile-prdt-name">Quantity:</div>
-                            <div className="right-el-2-els-flex-els">{product.Variations[0].Quantity}</div>
+                        >
+                            Edit
                         </div>
 
-                        <div className="right-el-2-els-flex">
-                            <div className="mobile-prdt-title mobile-prdt-name">Price:</div>
-                            <div className="right-el-2-els-flex-els">{`$${parseFloat(product?.Variations[0].UnitPrice).toFixed(2).toString()}`}</div>
-
+                        <div 
+                            className='mobile-con-btns mobile-prdt-btn-delete'
+                            onClick={handleDelete}
+                        >
+                            Delete
                         </div>
-
-                        <div className="right-el-2-els-flex">
-                            <div className="mobile-prdt-title mobile-prdt-name">Color:</div>
-                            <div className="right-el-2-els-flex-els">{product.Variations[0].Color}</div>
-                        </div>
-
-
 
                     </div>
 
 
-
-                    <div className="right-el-2-els-2">
-
-                        <div className="right-el-2-els-flex">
-                            <div className="mobile-prdt-title mobile-prdt-name">Number in Pack:</div>
-                            <div className="right-el-2-els-flex-els">{product.Variations[0].NumberInPack}</div>
-                        </div>
-
-                        <div className="right-el-2-els-flex">
-                            <div className="mobile-prdt-title mobile-prdt-name">Size:</div>
-                            <div className="right-el-2-els-flex-els">{product.Variations[0].Size}</div>
-                        </div>
-
-                    </div>
-
-                   
-
                 </div>
 
-                <div className="mobile-prdt-table-flex-container-right-el mobile-con-btn-flex">
-
-                    <div className='mobile-con-btns mobile-prdt-btn-edit'>Edit</div>
-
-                    <div className='mobile-con-btns mobile-prdt-btn-delete'
-                    
-                    >
-                        Delete
-                    </div>
-
-                </div>
-
-
+                
 
             </div>
 
             
-
         </div>
-
-
-
-        
-    </div>
+    </>
   )
 }
 

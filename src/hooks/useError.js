@@ -95,7 +95,6 @@ const useError = () => {
 
     const dataErrorHandler = (error, entity, post) => {
 
-        console.log(error);
         let msg;
 
 

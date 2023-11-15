@@ -49,12 +49,15 @@ const SelectedProduct = () => {
     const [size, setSize] = useState("");
     const [pack, setPack] = useState("");
 
-    const { pending, setPending, setModalOpen, message, setMessage, deleteMode, setDeleteMode } = useContext(DataContext);
+    const {setEditMode, pending, setPending, setModalOpen, message, setMessage, deleteMode, setDeleteMode, setCompleted } = useContext(DataContext);
 
+
+    useEffect(() => {
+        setPending(true);
+    }, [setPending])
 
   
     useEffect(() => {
-
 
 
         const getData = async () => {
@@ -82,18 +85,10 @@ const SelectedProduct = () => {
                     
                 });
 
-                setPending(true);
-
-                console.log(res);
 
                 if(res.status === 200){
 
                     const product = res.data;
-
-                    console.log(product.Variations[0].ImageUrl);
-                
-                    
-   
 
                     if(product.length === 0){
                         return;
@@ -108,8 +103,7 @@ const SelectedProduct = () => {
                         setUnitPrice(product.Variations[0].UnitPrice);
                         setProductName(product.ProductName);
                         setDescription(product.ProductDescription);
-                        // setItemQuantity(product.Quantity);
-                        // setItemPrice(product.UnitPrice);
+
                         setPending(false);   
                                   
 
@@ -134,15 +128,16 @@ const SelectedProduct = () => {
                 let msg = dataErrorHandler(error, "product", true);
     
                 setMessage({...message, body: msg, type: "error" });
-                setModalOpen(true);
+                setCompleted(true);
 
             
             }
         }
 
+
         getData();
 
-    }, [id, setPending, setModalOpen, message, setMessage, dataErrorHandler]);
+    }, [setCompleted, id, setPending, setModalOpen, message, setMessage, dataErrorHandler]);
 
 
 
@@ -157,13 +152,14 @@ const SelectedProduct = () => {
 
 
     if(gotoEditProduct){
+        setEditMode(true);
         return <Navigate to={`/admin/products/edit-product/${id}`} />
     }
 
   
 
-     // Create and configure your Cloudinary instance.
-     const cld = new Cloudinary({
+    // Create and configure your Cloudinary instance.
+    const cld = new Cloudinary({
         cloud: {
             cloudName: 'greenietec'
         }
