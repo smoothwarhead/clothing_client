@@ -108,7 +108,7 @@
 
 
 .mobile-con-btn-flex{
-    width: 60%;
+    width: 100%;
     margin: auto;
     display: flex;
     justify-content: space-between;
@@ -129,9 +129,15 @@
   opacity: .7;
 }
 
-.mobile-prdt-btn-edit{
+.mobile-prdt-btn-details{
     background: #09203F;
     color: #fff;
+}
+.mobile-prdt-btn-edit{
+    background: transparent;
+    border: 1px solid #09203F;
+    color: #09203F;
+    
 }
 
 .mobile-prdt-btn-delete{

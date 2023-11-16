@@ -5,6 +5,8 @@ import StringFormat from '../../../utils/StringFormat';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { DataContext } from '../../../context/DataContext';
+import ConfirmationPage from '../../modals/ConfirmationPage';
+import Modal from '../../modals/Modal';
 
 
 
@@ -13,7 +15,7 @@ const MobileProductTable = ({ product }) => {
 
     const navigate = useNavigate();
 
-    const { message, setEditMode, setMessage, setDeleteMode } = useContext(DataContext);
+    const { message, modalOpen, setModalOpen, setEditMode, setMessage, setDeleteMode } = useContext(DataContext);
 
 
     // Create and configure your Cloudinary instance.
@@ -36,6 +38,11 @@ const MobileProductTable = ({ product }) => {
 
     }
 
+    const handleDetails = () => {
+        navigate(`/admin/products/product/${product.ProductId}`);
+
+    }
+
     const handleDelete = () => {
         const msg = "Are you sure you want to delete this product?"
         setMessage({...message, body: msg, type: "error" });
@@ -44,10 +51,30 @@ const MobileProductTable = ({ product }) => {
     }
 
 
+    const handleOk = () => {
+        setModalOpen(false);
+        navigate("/admin/products");
+        // setProductReload(true);
+        
+      }
+    
+    
+      const handleCloseModal = () => {
+        setModalOpen(false);
+      }
+
 
   return (
 
     <>
+        { modalOpen &&
+            <Modal                     
+                modalBody={ <ConfirmationPage handleOk={handleOk} /> }
+                modalType={message.type}
+                closeModal={handleCloseModal}
+                
+            />
+        }
         <div className='mobile-prdt-table-container'>
 
             <div className="mobile-prdt-table-flex-container">
@@ -121,6 +148,14 @@ const MobileProductTable = ({ product }) => {
                     </div>
 
                     <div className="mobile-prdt-table-flex-container-right-el mobile-con-btn-flex">
+
+                        <div 
+                            className='mobile-con-btns mobile-prdt-btn-details'
+                            onClick={handleDetails}
+
+                        >
+                            Details
+                        </div>
 
                         <div 
                             className='mobile-con-btns mobile-prdt-btn-edit'

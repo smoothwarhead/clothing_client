@@ -1,8 +1,8 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import './dashboardLayout.css';
 import SideBar from '../../components/sidebar/SideBar';
 import TopBar from '../../components/topbar/TopBar';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { DataContext } from '../../context/DataContext';
 import Modal from '../../components/modals/Modal';
 import ConfirmationPage from '../../components/modals/ConfirmationPage';
@@ -12,7 +12,22 @@ import ConfirmationPage from '../../components/modals/ConfirmationPage';
 
 const DashboardLayout = () => {
 
+  const [pageReload, setPageReload] = useState(false);
+
   const navigate = useNavigate();
+    
+  const location = useLocation();
+
+
+  useEffect(() => {
+    if(!pageReload){
+      return
+    }else{
+      window.location.reload(false);
+    }
+  }, [pageReload])
+
+
 
   const { completed, setModalOpen, setCompleted, setDeleteMode, closeModal, message } = useContext(DataContext);
 
@@ -21,8 +36,14 @@ const DashboardLayout = () => {
     setModalOpen(false);
     setCompleted(false);
     setDeleteMode(false);
-    navigate(-1);
-    // return <Navigate to="admin/products" replace={true}/>
+
+    if(location.pathname === "/admin/products"){
+      setPageReload(true);
+    }else{
+      navigate(-1);
+
+    }
+   
 
   }
 

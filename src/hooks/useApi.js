@@ -88,7 +88,7 @@ const useApi = () => {
                 JSON.stringify(data),
                 {
                     headers: { 'Content-Type': 'application/json' }, 
-
+                    
                 }
                 
             );
@@ -272,7 +272,6 @@ const useApi = () => {
         
         
     }
-
 
 
     const createProduct = async (data) => {
