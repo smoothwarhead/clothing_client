@@ -88,6 +88,11 @@ const useError = () => {
             
         }
 
+        else{
+            msg =  "We are sorry. Something went wrong with the server"; 
+            return msg;
+        }
+
 
             
     }
