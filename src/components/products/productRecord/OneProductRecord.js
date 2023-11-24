@@ -71,6 +71,8 @@ const OneProductRecord = ({ product }) => {
                         <AdvancedImage style={{maxWidth: '100%', maxHeight: '100%'}} cldImg={myImage}/>                    
                     </div>
 
+                    {/* <img src={product?.Variations[0].ImageUrl} alt={product?.alt} /> */}
+
                 </div>
 
                 <div className="product-elements product-title-name">{StringFormat.truncateWord(product?.ProductName)}</div>

@@ -89,11 +89,11 @@ function App() {
                 {/* <Route path="transactions" element={ <Transactions /> } />  */}
 
 
-              </Route>
+              {/* </Route> */}
 
             </Route>
 
-          {/* </Route> */}
+          </Route>
 
 
         </Routes>
